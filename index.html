@@ -227,6 +227,9 @@
         }
     </style>
 </head>
+<link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 <body>
     <canvas id="fireworksCanvas"></canvas>
 
@@ -234,12 +237,37 @@
         <div class="flap"></div>
         <div class="envelope"></div>
 
-        <div class="letter">
-            <h1>Дорогая Алина!</h1>
-            <p>От всей души поздравляю тебя с днем рождения! Желаю, чтобы твоя жизнь была наполнена яркими событиями, гармонией, вдохновением и успехом во всех начинаниях. Оставайся всегда такой же замечательной и счастливой!</p>
-            <div class="signature">С наилучшими пожеланиями</div>
+        <!-- Добавил padding-top: 15px; чтобы прижать текст ближе к верхнему краю листочка -->
+        <div class="letter" style="padding-top: 15px;">
+            
+            <!-- Заменил margin на "0 0 10px 0", что полностью убирает пустоту над заголовком -->
+            <h1 style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 20px; color: #d11a5b; text-align: center; margin: 0 0 10px 0; letter-spacing: 0.5px;">
+                🎉 Дорогая Алина! 🎂
+            </h1>
+            
+            <div style="font-family: 'Caveat', cursive; font-size: 18px; color: #444; line-height: 1.2; text-align: center;">
+                <p style="margin: 0 0 8px 0;">
+                    Желаю счастья и удачи,<br>
+                    Решать легко свои задачи,<br>
+                    Любви, добра и понимания,<br>
+                    Быть в центре общего внимания.
+                </p>
+                <p style="margin: 0 0 15px 0;">
+                    Почаще радостно смеяться...<br>
+                    Или хотя бы улыбаться!<br>
+                    Еще чудес и чуть везенья.<br>
+                    Моя сестренка, с днем рожденья!
+                </p>
+            </div>
+			<div class="signature" style="font-family: 'Caveat', cursive; font-size: 13px; font-weight: normal; text-align: right; color: #333; margin-top: 10px;">
+                С наилучшими пожеланиями, Таймас
+            </div>
         </div>
-    </div>
+
+
+
+</div>
+
 
     <script>
         const canvas = document.getElementById('fireworksCanvas');
