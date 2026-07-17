@@ -176,7 +176,7 @@
 		
 		.envelope-wrapper.open .letter {
 		  transform: translateY(var(--letter-fly));
-		  height: var(--letter-open-h);
+			: var(--letter-open-h);
 		  z-index: 40;
 		  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s,
 					  height 0.4s ease 0.4s,
@@ -257,23 +257,38 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        function toggleEnvelope() {
-            const wrapper = document.querySelector('.envelope-wrapper');
-            wrapper.classList.toggle('open');
-            isOpened = wrapper.classList.contains('open');
+		function toggleEnvelope() {
+			const wrapper = document.querySelector('.envelope-wrapper');
+			wrapper.classList.toggle('open');
+			isOpened = wrapper.classList.contains('open');
 
-            if (isOpened) {
-                if (!animationId) animate();
-            } else {
-                fireworks = [];
-                particles = [];
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
-            }
-        }
+			// Получаем наш звук салюта
+			const fireworkSound = document.getElementById('fireworkSound');
+
+			if (isOpened) {
+				// Включаем салют чуть позже, когда письмо взлетит
+				setTimeout(() => {
+					if (isOpened && fireworkSound) {
+						fireworkSound.currentTime = 0;
+						fireworkSound.play().catch(e => console.log("Звук заблокирован:", e));
+					}
+				}, 400);
+
+				if (!animationId) animate();
+			} else {
+				// Выключаем салют при закрытии конверта
+				if (fireworkSound) fireworkSound.pause();
+				
+				fireworks = [];
+				particles = [];
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				if (animationId) {
+					cancelAnimationFrame(animationId);
+					animationId = null;
+				}
+			}
+		}
+
 
         class Particle {
             constructor(x, y, color) {
@@ -371,5 +386,6 @@
             animationId = requestAnimationFrame(animate);
         }
     </script>
+<audio id="fireworkSound" src="salute.mp3" preload="auto" loop></audio>
 </body>
 </html>
